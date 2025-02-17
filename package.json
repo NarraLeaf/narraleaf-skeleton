@@ -1,0 +1,24 @@
+{
+  "name": "narraleaf-skeleton",
+  "version": "0.0.1",
+  "description": "NarraLeaf Skeleton",
+  "packageManager": "yarn@4.4.1",
+  "bin": "./dist/index.js",
+  "scripts": {
+    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js",
+    "watch": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --watch",
+    "prepublishOnly": "yarn build"
+  },
+  "devDependencies": {
+    "esbuild": "^0.19.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.3.2",
+    "@types/node": "^22.13.4",
+    "chalk": "^5.4.1"
+  },
+  "installConfig": {
+    "pnp": false
+  }
+}
