@@ -12,12 +12,10 @@ import chalk from "chalk";
  * ├── (tsconfig.json)
  * ├── /public/
  * │   └── placeholder.png
- * └── /src/
- *     ├── index.(ts|js)
- *     └── /pages/
- *         ├── home.(tsx|jsx)
- *         ├── settings.(tsx|jsx)
- *         └── about.(tsx|jsx)
+ * ├── /main/
+ * │   └── index.(ts|js)
+ * └── /pages/
+ *     └── home.(tsx|jsx)
  */
 
 export type FileTree = {
@@ -60,30 +58,22 @@ export const JavaScriptFiles: FileTree[] = [
     },
     {
         type: "dir",
-        name: "src",
+        name: "main",
         children: [
             {
                 type: "file",
                 name: "index.js"
-            },
-            {
-                type: "dir",
-                name: "pages",
-                children: [
-                    {
-                        type: "file",
-                        name: "home.jsx"
-                    },
-                    {
-                        type: "file",
-                        name: "settings.jsx"
-                    },
-                    {
-                        type: "file",
-                        name: "about.jsx"
-                    }
-                ]
             }
+        ]
+    },
+    {
+        type: "dir",
+        name: "pages",
+        children: [
+            {
+                type: "file",
+                name: "home.jsx"
+            },
         ]
     }
 ];
@@ -118,30 +108,22 @@ export const TypeScriptFiles: FileTree[] = [
     },
     {
         type: "dir",
-        name: "src",
+        name: "main",
         children: [
             {
                 type: "file",
                 name: "index.ts"
-            },
-            {
-                type: "dir",
-                name: "pages",
-                children: [
-                    {
-                        type: "file",
-                        name: "home.tsx"
-                    },
-                    {
-                        type: "file",
-                        name: "settings.tsx"
-                    },
-                    {
-                        type: "file",
-                        name: "about.tsx"
-                    }
-                ]
             }
+        ]
+    },
+    {
+        type: "dir",
+        name: "pages",
+        children: [
+            {
+                type: "file",
+                name: "home.tsx"
+            },
         ]
     }
 ];
@@ -190,7 +172,7 @@ function copySkeleton(
         for (const file of files) {
             if (file.type === "file") {
                 if (await isFileExists(path.join(dest, file.name))) {
-                    onReject(new Error("File already exists"), path.join(dest, file.name));
+                    onReject(new Error(`File ${file.name} already exists`), path.join(dest, file.name));
                     continue;
                 }
                 await copyFile(path.join(src, file.srcName || file.name), path.join(dest, file.name));

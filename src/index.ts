@@ -53,10 +53,11 @@ async function installDependencies(dest: string) {
     fall.start("Installing dependencies");
     await install(fall, dest);
 
-    fall.end(`Created skeleton in ${chalk.blue(Date.now() - time)}ms`);
+    console.log(`Project created at ${chalk.blue(dest)}`);
+    console.log(chalk.green(`Created skeleton in ${chalk.blue(Date.now() - time)}ms`));
 }
 
-!async function (){
+!async function () {
     const dest = await skeleton();
     await installDependencies(dest);
 }();
