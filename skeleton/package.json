@@ -1,1 +1,12 @@
-{}
+{
+  "name": "my-narraleaf-project",
+  "version": "0.0.1",
+  "private": true,
+  "description": "A new NarraLeaf project",
+  "scripts": {
+    "start": "echo 'Not implemented yet' && exit 1"
+  },
+  "dependencies": {
+    "narraleaf-react": "latest"
+  }
+}

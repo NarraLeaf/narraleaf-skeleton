@@ -25,10 +25,9 @@ import path from "path";
 import {createSkeleton} from "./source";
 import {FallTask, getArguments} from "./console";
 import chalk from "chalk";
+import {install} from "./install";
 
-!async function (){
-    const time = Date.now();
-
+async function skeleton(): Promise<string> {
     const fall = new FallTask();
     fall.start("Creating skeleton");
 
@@ -37,12 +36,28 @@ import chalk from "chalk";
     const dest = path.isAbsolute(argDest) ? argDest : path.join(process.cwd(), argDest);
 
     const skeletonPath = path.join(__dirname, "../skeleton");
+    const time = Date.now();
 
     fall.step(chalk.gray(`Skeleton path: ${skeletonPath}`))
         .step(chalk.gray(`Destination path: ${dest}`))
         .step(chalk.gray(`Using ${useTypeScript ? "TypeScript" : "JavaScript"}`));
 
     await createSkeleton(fall, useTypeScript, skeletonPath, dest);
+    fall.end(`Created skeleton in ${chalk.blue(Date.now() - time)}ms`);
+
+    return dest;
+}
+
+async function installDependencies(dest: string) {
+    const time = Date.now();
+    const fall = new FallTask();
+    fall.start("Installing dependencies");
+    await install(fall, dest);
 
     fall.end(`Created skeleton in ${chalk.blue(Date.now() - time)}ms`);
+}
+
+!async function (){
+    const dest = await skeleton();
+    await installDependencies(dest);
 }();
