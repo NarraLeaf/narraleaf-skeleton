@@ -14,8 +14,10 @@ import chalk from "chalk";
  * │   └── placeholder.png
  * ├── /main/
  * │   └── index.(ts|js)
- * └── /pages/
- *     └── home.(tsx|jsx)
+ * └── /renderer/
+ *     ├── app.(tsx|jsx)
+ *     └── /pages/
+ *         └── home.(tsx|jsx)
  */
 
 export type FileTree = {
@@ -68,12 +70,22 @@ export const JavaScriptFiles: FileTree[] = [
     },
     {
         type: "dir",
-        name: "pages",
+        name: "renderer",
         children: [
             {
                 type: "file",
-                name: "home.jsx"
+                name: "app.jsx"
             },
+            {
+                type: "dir",
+                name: "pages",
+                children: [
+                    {
+                        type: "file",
+                        name: "home.jsx"
+                    },
+                ]
+            }
         ]
     }
 ];
@@ -118,12 +130,22 @@ export const TypeScriptFiles: FileTree[] = [
     },
     {
         type: "dir",
-        name: "pages",
+        name: "renderer",
         children: [
             {
                 type: "file",
-                name: "home.tsx"
+                name: "app.tsx"
             },
+            {
+                type: "dir",
+                name: "pages",
+                children: [
+                    {
+                        type: "file",
+                        name: "home.tsx"
+                    },
+                ]
+            }
         ]
     }
 ];
