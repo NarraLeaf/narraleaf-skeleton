@@ -5,9 +5,7 @@
   "packageManager": "yarn@4.4.1",
   "bin": "./dist/index.js",
   "scripts": {
-    "build": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js",
-    "watch": "esbuild src/index.ts --bundle --platform=node --outfile=dist/index.js --watch",
-    "prepublishOnly": "yarn build"
+    "build": "esbuild src/index.ts --bundle --platform=node --format=cjs --outfile=dist/index.js"
   },
   "devDependencies": {
     "esbuild": "^0.19.0",
@@ -20,5 +18,11 @@
   },
   "installConfig": {
     "pnp": false
-  }
+  },
+  "files": [
+    "package.json",
+    "LICENSE",
+    "dist/",
+    "skeleton/"
+  ]
 }

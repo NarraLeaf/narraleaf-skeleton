@@ -12,8 +12,7 @@
  *      |::/  /        /:/  /      |:|\/__/      |:|\/__/        /:/  /     \:\  \    \:\ \/__/        /:/  /         \/__/
  *      /:/  /        /:/  /       |:|  |        |:|  |         /:/  /       \:\__\    \:\__\         /:/  /
  *      \/__/         \/__/         \|__|         \|__|         \/__/         \/__/     \/__/         \/__/
- */
-/**
+ *
  * © 2025 Nomen (helloyork)
  * NarraLeaf-Skeleton
  * A suggested project structure for NarraLeaf engine
