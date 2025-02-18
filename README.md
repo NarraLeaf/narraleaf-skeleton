@@ -7,7 +7,7 @@ For NarraLeaf, see [NarraLeaf](https://github.com/NarraLeaf/NarraLeaf)
 ## Usage
 
 ```bash
-npx narraleaf-skeleton
+npx narraleaf-skeleton my-skeleton-project
 ```
 
 ## Docs

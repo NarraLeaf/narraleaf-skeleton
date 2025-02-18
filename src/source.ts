@@ -10,6 +10,8 @@ import chalk from "chalk";
  * ├── README.md
  * ├── .gitignore
  * ├── (tsconfig.json)
+ * ├── /story/
+ * │   └── entry.(ts|js)
  * ├── /public/
  * │   └── placeholder.png
  * ├── /main/
@@ -47,6 +49,16 @@ export const JavaScriptFiles: FileTree[] = [
         type: "file",
         name: ".gitignore",
         srcName: "gitignore.txt"
+    },
+    {
+        type: "dir",
+        name: "story",
+        children: [
+            {
+                type: "file",
+                name: "entry.js"
+            }
+        ]
     },
     {
         type: "dir",
@@ -107,6 +119,16 @@ export const TypeScriptFiles: FileTree[] = [
         type: "file",
         name: ".gitignore",
         srcName: "gitignore.txt"
+    },
+    {
+        type: "dir",
+        name: "story",
+        children: [
+            {
+                type: "file",
+                name: "entry.ts"
+            }
+        ]
     },
     {
         type: "dir",
