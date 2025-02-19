@@ -5,19 +5,19 @@ import chalk from "chalk";
 
 /**
  * NarraLeaf-Skeleton
- * ├── package.json
+ * ├── package-js.json
  * ├── narraleaf.config.js
  * ├── README.md
  * ├── .gitignore
  * ├── (tsconfig.json)
  * ├── /story/
  * │   └── entry.(ts|js)
- * ├── /public/
- * │   └── placeholder.png
  * ├── /main/
  * │   └── index.(ts|js)
  * └── /renderer/
  *     ├── app.(tsx|jsx)
+ *     ├── /public/
+ *     │   └── placeholder.png
  *     └── /pages/
  *         └── home.(tsx|jsx)
  */
@@ -35,11 +35,13 @@ export type FileTree = {
 export const JavaScriptFiles: FileTree[] = [
     {
         type: "file",
-        name: "package.json"
+        name: "package-js.json",
+        srcName: "package-js.json"
     },
     {
         type: "file",
-        name: "narraleaf.config.js"
+        name: "narraleaf.config.js",
+        srcName: "narraleaf.config-js.js"
     },
     {
         type: "file",
@@ -57,16 +59,6 @@ export const JavaScriptFiles: FileTree[] = [
             {
                 type: "file",
                 name: "entry.js"
-            }
-        ]
-    },
-    {
-        type: "dir",
-        name: "public",
-        children: [
-            {
-                type: "file",
-                name: "placeholder.png"
             }
         ]
     },
@@ -90,6 +82,16 @@ export const JavaScriptFiles: FileTree[] = [
             },
             {
                 type: "dir",
+                name: "public",
+                children: [
+                    {
+                        type: "file",
+                        name: "placeholder.png"
+                    }
+                ]
+            },
+            {
+                type: "dir",
                 name: "pages",
                 children: [
                     {
@@ -105,11 +107,13 @@ export const JavaScriptFiles: FileTree[] = [
 export const TypeScriptFiles: FileTree[] = [
     {
         type: "file",
-        name: "package.json"
+        name: "package.json",
+        srcName: "package-ts.json"
     },
     {
         type: "file",
-        name: "narraleaf.config.js"
+        name: "narraleaf.config.js",
+        srcName: "narraleaf.config-ts.js"
     },
     {
         type: "file",
@@ -132,16 +136,6 @@ export const TypeScriptFiles: FileTree[] = [
     },
     {
         type: "dir",
-        name: "public",
-        children: [
-            {
-                type: "file",
-                name: "placeholder.png"
-            }
-        ]
-    },
-    {
-        type: "dir",
         name: "main",
         children: [
             {
@@ -157,6 +151,16 @@ export const TypeScriptFiles: FileTree[] = [
             {
                 type: "file",
                 name: "app.tsx"
+            },
+            {
+                type: "dir",
+                name: "public",
+                children: [
+                    {
+                        type: "file",
+                        name: "placeholder.png"
+                    }
+                ]
             },
             {
                 type: "dir",
