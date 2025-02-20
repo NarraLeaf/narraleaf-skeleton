@@ -125,6 +125,10 @@ export const TypeScriptFiles: FileTree[] = [
         srcName: "gitignore.txt"
     },
     {
+        type: "file",
+        name: "tsconfig.json"
+    },
+    {
         type: "dir",
         name: "story",
         children: [
