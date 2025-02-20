@@ -7,9 +7,10 @@
     "start": "echo 'Not implemented yet' && exit 1"
   },
   "dependencies": {
+    "narraleaf": "latest",
     "narraleaf-react": "latest",
-    "react": "19",
-    "react-dom": "19"
+    "react": ">=19",
+    "react-dom": ">=19"
   },
   "devDependencies": {
     "@types/react": "19",
