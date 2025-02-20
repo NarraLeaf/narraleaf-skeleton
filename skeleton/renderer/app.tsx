@@ -1,10 +1,11 @@
-import react from 'react';
+import React from 'react';
+import "./src/base.css";
 
-const App = (props: {children: react.ReactNode}) => {
+const App = (props: {children: React.ReactNode}) => {
     return (
-        <react.Fragment>
+        <React.Fragment>
             {props.children}
-        </react.Fragment>
+        </React.Fragment>
     );
 };
 

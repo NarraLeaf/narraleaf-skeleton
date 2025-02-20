@@ -1,10 +1,11 @@
-import react from 'react';
+import React from 'react';
+import "./src/base.css";
 
 const App = (props) => {
     return (
-        <react.Fragment>
+        <React.Fragment>
             {props.children}
-        </react.Fragment>
+        </React.Fragment>
     );
 };
 
