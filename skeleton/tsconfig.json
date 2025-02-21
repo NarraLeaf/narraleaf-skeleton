@@ -10,6 +10,8 @@
     "jsx": "react-jsx",
   },
   "include": [
+    "story",
+    "renderer",
     "main"
   ]
 }

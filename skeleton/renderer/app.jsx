@@ -1,5 +1,6 @@
 import React from 'react';
 import "./src/base.css";
+import {story} from "../story/entry";
 
 const App = (props) => {
     return (
@@ -10,3 +11,4 @@ const App = (props) => {
 };
 
 export default App;
+export {story};
