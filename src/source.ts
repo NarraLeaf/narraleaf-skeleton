@@ -10,12 +10,13 @@ import chalk from "chalk";
  * ├── README.md
  * ├── .gitignore
  * ├── (tsconfig.json)
- * ├── /story/
- * │   └── entry.(ts|js)
  * ├── /main/
  * │   └── index.(ts|js)
  * └── /renderer/
  *     ├── app.(tsx|jsx)
+ *     ├── /src/
+ *     │   ├── story.(ts|js)
+ *     │   └── base.css
  *     ├── /public/
  *     │   └── placeholder.png
  *     └── /pages/
@@ -54,16 +55,6 @@ export const JavaScriptFiles: FileTree[] = [
     },
     {
         type: "dir",
-        name: "story",
-        children: [
-            {
-                type: "file",
-                name: "entry.js"
-            }
-        ]
-    },
-    {
-        type: "dir",
         name: "main",
         children: [
             {
@@ -79,6 +70,20 @@ export const JavaScriptFiles: FileTree[] = [
             {
                 type: "file",
                 name: "app.jsx"
+            },
+            {
+                type: "dir",
+                name: "src",
+                children: [
+                    {
+                        type: "file",
+                        name: "base.css"
+                    },
+                    {
+                        type: "file",
+                        name: "story.js"
+                    }
+                ]
             },
             {
                 type: "dir",
@@ -130,16 +135,6 @@ export const TypeScriptFiles: FileTree[] = [
     },
     {
         type: "dir",
-        name: "story",
-        children: [
-            {
-                type: "file",
-                name: "entry.ts"
-            }
-        ]
-    },
-    {
-        type: "dir",
         name: "main",
         children: [
             {
@@ -155,6 +150,20 @@ export const TypeScriptFiles: FileTree[] = [
             {
                 type: "file",
                 name: "app.tsx"
+            },
+            {
+                type: "dir",
+                name: "src",
+                children: [
+                    {
+                        type: "file",
+                        name: "base.css"
+                    },
+                    {
+                        type: "file",
+                        name: "story.js"
+                    }
+                ]
             },
             {
                 type: "dir",

@@ -1,6 +1,6 @@
 import React from 'react';
 import "./src/base.css";
-import {story} from "../story/entry";
+import {story} from "./src/story";
 
 const App = (props: {children: React.ReactNode}) => {
     return (
@@ -12,3 +12,4 @@ const App = (props: {children: React.ReactNode}) => {
 
 export default App;
 export {story};
+

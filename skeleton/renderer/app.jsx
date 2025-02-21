@@ -1,6 +1,6 @@
 import React from 'react';
 import "./src/base.css";
-import {story} from "../story/entry";
+import {story} from "./src/story";
 
 const App = (props) => {
     return (
