@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "narraleaf": "latest",
-    "narraleaf-react": "latest",
+    "narraleaf-react": "0.3.0",
     "react": ">=19",
     "react-dom": ">=19"
   },

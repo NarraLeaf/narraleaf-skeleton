@@ -161,7 +161,7 @@ export const TypeScriptFiles: FileTree[] = [
                     },
                     {
                         type: "file",
-                        name: "story.js"
+                        name: "story.ts"
                     }
                 ]
             },
