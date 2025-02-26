@@ -17,6 +17,12 @@ app.onReady(() => {
     height: 600
   });
 
+  // Load the React app
   window.loadFile(app.getEntryFile());
   window.show();
+
+  // Close the app when the window is closed
+  window.onClosed(() => {
+    app.terminate();
+  });
 });
