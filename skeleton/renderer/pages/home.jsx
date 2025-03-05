@@ -1,9 +1,11 @@
-import React from 'react';
+import {Page} from "narraleaf-react";
 
 export default function Home() {
     return (
-        <div>
-            <span>Home</span>
-        </div>
+        <Page id={"home"}>
+            <div>
+                <span>Home</span>
+            </div>
+        </Page>
     );
 }

@@ -1,14 +1,11 @@
 import React, {useEffect} from 'react';
-import {Page, useGame} from 'narraleaf-react';
+import {useGame} from 'narraleaf-react';
 
 // Import your assets
 import "./src/base.css";
 import {story} from "./src/story";
 
-// Import your pages
-import Home from "./pages/home";
-
-const App = () => {
+const App = ({children}: {children: React.ReactNode}) => {
     // Access the game instance by using the useGame hook
     const {game} = useGame();
 
@@ -25,10 +22,7 @@ const App = () => {
 
     return (
         <>
-            {/* Place your pages here */}
-            <Page id={"home"}>
-                <Home />
-            </Page>
+            {children}
         </>
     );
 };
