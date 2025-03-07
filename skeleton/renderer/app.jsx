@@ -27,6 +27,21 @@ const App = ({children}) => {
     );
 };
 
+const splashScreen = [{
+    initial: {opacity: 0},
+    animate: {opacity: 1, transition: {duration: 2}}, // enter in 2 seconds
+    exit: {opacity: 0, transition: {duration: 1}}, // exit in 1 second
+    duration: 3, // stay for 3 seconds
+    splashScreen:(
+        <div className={"splash-screen"}>
+            <span>Created with NarraLeaf</span>
+        </div>
+    )
+}];
+
 export default App;
-export {story}; // Exporting the story is required
+export const meta = {
+    story,
+    splashScreen
+};
 
