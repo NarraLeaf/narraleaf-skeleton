@@ -13,6 +13,7 @@ app.onReady(async () => {
     width: 800,
     height: 600
   });
+  window.setTitle("My NarraLeaf App");
 
   // Close the app when the window is closed
   window.onClosed(() => {
