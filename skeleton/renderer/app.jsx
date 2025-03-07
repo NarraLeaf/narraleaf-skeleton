@@ -34,7 +34,7 @@ const splashScreen = [{
     duration: 3, // stay for 3 seconds
     splashScreen:(
         <div className={"splash-screen"}>
-            <span>Created with NarraLeaf</span>
+            <div><p className={"splash-text"}>Created with NarraLeaf</p></div>
         </div>
     )
 }];
