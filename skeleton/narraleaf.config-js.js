@@ -1,4 +1,4 @@
-const {BuildTarget, WindowsConfig, WindowsBuildTarget} = require("narraleaf");
+const {BuildTarget, WindowsBuildTarget} = require("narraleaf");
 
 module.exports = {
   renderer: {
@@ -10,7 +10,9 @@ module.exports = {
     targets: [
       BuildTarget.Windows({
         target: WindowsBuildTarget.dir,
+        icon: "assets/app-icon.ico",
       })
     ]
   },
+  resources: "assets"
 };

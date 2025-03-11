@@ -3,6 +3,8 @@ import {AppConfig} from "narraleaf";
 // Create a new app
 const app = new AppConfig({
     forceSandbox: true
+}).configWindows({
+    appIcon: "assets/app-icon.ico"
 }).create();
 
 // When the app is ready, launch the app with a window

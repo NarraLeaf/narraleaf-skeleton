@@ -10,6 +10,8 @@ import chalk from "chalk";
  * ├── README.md
  * ├── .gitignore
  * ├── (tsconfig.json)
+ * ├── /assets/
+ * │   └── app-icon.ico
  * ├── /main/
  * │   └── index.(ts|js)
  * └── /renderer/
@@ -52,6 +54,16 @@ export const JavaScriptFiles: FileTree[] = [
         type: "file",
         name: ".gitignore",
         srcName: "gitignore.txt"
+    },
+    {
+        type: "dir",
+        name: "assets",
+        children: [
+            {
+                type: "file",
+                name: "app-icon.ico"
+            }
+        ]
     },
     {
         type: "dir",
@@ -132,6 +144,16 @@ export const TypeScriptFiles: FileTree[] = [
     {
         type: "file",
         name: "tsconfig.json"
+    },
+    {
+        type: "dir",
+        name: "assets",
+        children: [
+            {
+                type: "file",
+                name: "app-icon.ico"
+            }
+        ]
     },
     {
         type: "dir",
