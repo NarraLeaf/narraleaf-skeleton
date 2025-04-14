@@ -4,7 +4,8 @@
   "private": true,
   "description": "A new NarraLeaf project",
   "scripts": {
-    "start": "echo 'Not implemented yet' && exit 1"
+    "build": "narraleaf build",
+    "dev": "narraleaf dev"
   },
   "dependencies": {
     "narraleaf": "latest",
