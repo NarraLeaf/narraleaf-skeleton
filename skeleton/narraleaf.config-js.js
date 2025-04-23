@@ -10,9 +10,9 @@ module.exports = {
     targets: [
       BuildTarget.Windows({
         target: WindowsBuildTarget.dir,
-        icon: "assets/app-icon.ico",
+        icon: "main/assets/app-icon.ico",
       })
     ]
   },
-  resources: "assets"
+  resources: "main/assets"
 };

@@ -10,9 +10,9 @@ import chalk from "chalk";
  * ├── README.md
  * ├── .gitignore
  * ├── (tsconfig.json)
- * ├── /assets/
- * │   └── app-icon.ico
  * ├── /main/
+ * ├── ├── /assets/
+ * ├── │   └── app-icon.ico
  * │   └── index.(ts|js)
  * └── /renderer/
  *     ├── app.(tsx|jsx)
@@ -57,18 +57,18 @@ export const JavaScriptFiles: FileTree[] = [
     },
     {
         type: "dir",
-        name: "assets",
-        children: [
-            {
-                type: "file",
-                name: "app-icon.ico"
-            }
-        ]
-    },
-    {
-        type: "dir",
         name: "main",
         children: [
+            {
+                type: "dir",
+                name: "assets",
+                children: [
+                    {
+                        type: "file",
+                        name: "app-icon.ico"
+                    }
+                ]
+            },
             {
                 type: "file",
                 name: "index.js"
@@ -147,18 +147,18 @@ export const TypeScriptFiles: FileTree[] = [
     },
     {
         type: "dir",
-        name: "assets",
-        children: [
-            {
-                type: "file",
-                name: "app-icon.ico"
-            }
-        ]
-    },
-    {
-        type: "dir",
         name: "main",
         children: [
+            {
+                type: "dir",
+                name: "assets",
+                children: [
+                    {
+                        type: "file",
+                        name: "app-icon.ico"
+                    }
+                ]
+            },
             {
                 type: "file",
                 name: "index.ts"

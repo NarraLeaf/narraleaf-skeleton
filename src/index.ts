@@ -25,8 +25,12 @@ import {createSkeleton} from "./source";
 import {FallTask, getArguments} from "./console";
 import chalk from "chalk";
 import {install} from "./install";
+import fs from "fs/promises";
 
 async function skeleton(): Promise<string> {
+    const version = await readVersion();
+    console.log(chalk.gray(`NarraLeaf-Skeleton v${version}`));
+
     const fall = new FallTask();
     fall.start("Creating skeleton");
 
@@ -55,6 +59,13 @@ async function installDependencies(dest: string) {
 
     console.log(`Project created at ${chalk.blue(dest)}`);
     console.log(chalk.green(`Created skeleton in ${chalk.blue(Date.now() - time)}ms`));
+}
+
+async function readVersion() {
+    const packageJsonPath = path.join(__dirname, "../package.json");
+    const packageJson = await fs.readFile(packageJsonPath, "utf-8");
+    const version = JSON.parse(packageJson).version;
+    return version;
 }
 
 !async function () {

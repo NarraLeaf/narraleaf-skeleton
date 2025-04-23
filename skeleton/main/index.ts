@@ -4,7 +4,7 @@ import {AppConfig} from "narraleaf";
 const app = new AppConfig({
     forceSandbox: true
 }).configWindows({
-    appIcon: "assets/app-icon.ico"
+    appIcon: "main/assets/app-icon.ico"
 }).create();
 
 // When the app is ready, launch the app with a window
@@ -18,7 +18,7 @@ app.onReady(async () => {
     window.setTitle("My NarraLeaf App");
 
     // Close the app when the window is closed
-    window.onClosed(() => {
+    window.onClose(() => {
         app.quit();
     });
 });

@@ -7,15 +7,16 @@ import {story} from "./src/story";
 
 const App = ({children}) => {
     // Access the game instance by using the useGame hook
-    const {game} = useGame();
+    const game = useGame();
 
     useEffect(() => {
         game.configure({
-            player: {
-                width: 1920,
-                height: 1080,
-                aspectRatio: 16 / 9,
-            },
+            width: 1920, // set the resolution width
+            height: 1080, // set the resolution height
+            aspectRatio: 16 / 9, // set the aspect ratio
+
+            ratioUpdateInterval: 0, // disable the ratio update interval
+            cps: 10, // set the dialog characters per second to 10
             /* Add your custom configurations here */
         });
     }, []);

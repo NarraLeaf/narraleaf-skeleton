@@ -4,15 +4,15 @@ module.exports = {
   renderer: {
     baseDir: "./renderer"
   },
-  main: "./main/index.js",
+  main: "./main/index.ts",
   build: {
     appId: "com.example.app",
     targets: [
       BuildTarget.Windows({
         target: WindowsBuildTarget.dir,
-        icon: "assets/app-icon.ico",
+        icon: "main/assets/app-icon.ico",
       })
     ]
   },
-  resources: "assets"
+  resources: "main/assets"
 };
