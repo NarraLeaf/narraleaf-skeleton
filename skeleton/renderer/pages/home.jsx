@@ -1,11 +1,15 @@
-import {Page} from "narraleaf-react";
+import {useApp} from "narraleaf/client";
 
 export default function Home() {
+    const {app} = useApp();
+
     return (
-        <Page id={"home"}>
-            <div>
-                <span>Home</span>
-            </div>
-        </Page>
+        <div style={{
+            width: "100%",
+            height: "100%",
+            backgroundColor: "white",
+        }}>
+            <button onClick={() => app.newGame()}>New Game</button>
+        </div>
     );
 }
