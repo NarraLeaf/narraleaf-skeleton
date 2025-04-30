@@ -1,6 +1,6 @@
 {
   "name": "narraleaf-skeleton",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "NarraLeaf Skeleton",
   "packageManager": "yarn@4.4.1",
   "bin": "./dist/index.js",
