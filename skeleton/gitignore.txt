@@ -62,3 +62,6 @@ docker-compose.override.yml
 *.ipr
 *.iws
 .idea/
+
+# NarraLeaf
+.narraleaf
