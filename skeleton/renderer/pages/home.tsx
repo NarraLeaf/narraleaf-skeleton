@@ -1,3 +1,4 @@
+import React from "react";
 import {useApp} from "narraleaf/client";
 
 export default function Home() {
