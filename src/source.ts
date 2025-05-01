@@ -211,6 +211,58 @@ export const TypeScriptFiles: FileTree[] = [
     }
 ];
 
+export const TailwindCSSFiles: FileTree[] = [
+    {
+        type: "file",
+        name: "tailwind.config.js"
+    },
+    {
+        type: "file",
+        name: "postcss.config.js"
+    },
+    {
+        type: "dir",
+        name: "renderer",
+        children: [
+            {
+                type: "dir",
+                name: "src",
+                children: [
+                    {
+                        type: "file",
+                        name: "base.css",
+                        srcName: "base-tailwind.css"
+                    }
+                ]
+            }
+        ]
+    }
+];
+
+function mergeFileTrees(mainTree: FileTree[], extraTree: FileTree[]): FileTree[] {
+    const result = [...mainTree];
+    
+    for (const extra of extraTree) {
+        const existingIndex = result.findIndex(item => item.name === extra.name);
+        
+        if (existingIndex === -1) {
+            result.push(extra);
+        } else if (extra.type === "file") {
+            // Overwrite file
+            result[existingIndex] = extra;
+        } else if (extra.type === "dir" && result[existingIndex].type === "dir") {
+            // Merge directory contents
+            result[existingIndex] = {
+                type: "dir",
+                name: extra.name,
+                children: mergeFileTrees(result[existingIndex].children, extra.children)
+            };
+        }
+    }
+    
+    return result;
+}
+
 function copySkeleton(
     {
         src,
@@ -242,22 +294,9 @@ function copySkeleton(
         }
     };
 
-    const isFileExists = async (path: string) => {
-        try {
-            await fs.access(path);
-            return true;
-        } catch {
-            return false;
-        }
-    }
-
     const copyFiles = async (files: FileTree[], src: string, dest: string) => {
         for (const file of files) {
             if (file.type === "file") {
-                if (await isFileExists(path.join(dest, file.name))) {
-                    onReject(new Error(`File ${file.name} already exists`), path.join(dest, file.name));
-                    continue;
-                }
                 await copyFile(path.join(src, file.srcName || file.name), path.join(dest, file.name));
             } else if (file.type === "dir") {
                 await mkDir(path.join(dest, file.name));
@@ -291,15 +330,23 @@ function getFileTree(fileTree: FileTree[], failedEntities: string[]): string {
     return `${header}\n${lines.join("\n")}`;
 }
 
-export async function createSkeleton(fall: FallTask, useTS: boolean, src: string, dest: string) {
+export async function createSkeleton(
+    fall: FallTask, 
+    useTS: boolean, 
+    src: string, 
+    dest: string, 
+    extraFiles: FileTree[] = []
+) {
     await fall.waitForLoading<void>(async (resolve, _, setText) => {
         await fs.mkdir(dest, {recursive: true});
 
         const failedEntities: string[] = [];
+        const mergedFiles = mergeFileTrees(useTS ? TypeScriptFiles : JavaScriptFiles, extraFiles);
+        
         await copySkeleton({
             src,
             dest,
-            files: useTS ? TypeScriptFiles : JavaScriptFiles
+            files: mergedFiles
         }, (p) => {
             fall.step(chalk.gray(`Created ${path.relative(dest, p)}`));
             setText(`Created ${path.relative(dest, p)}`);
@@ -309,7 +356,7 @@ export async function createSkeleton(fall: FallTask, useTS: boolean, src: string
         });
 
         fall.step(chalk.gray("Generating file tree..."))
-            .step(getFileTree(useTS ? TypeScriptFiles : JavaScriptFiles, failedEntities));
+            .step(getFileTree(mergedFiles, failedEntities));
 
         resolve();
     }, "copying files...");

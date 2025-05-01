@@ -21,7 +21,7 @@
  * @license: MIT
  */
 import path from "path";
-import {createSkeleton} from "./source";
+import {createSkeleton, TailwindCSSFiles} from "./source";
 import {FallTask, getArguments} from "./console";
 import chalk from "chalk";
 import {install} from "./install";
@@ -35,6 +35,7 @@ async function skeleton(): Promise<string> {
     fall.start("Creating skeleton");
 
     const useTypeScript = await fall.confirm("Use TypeScript?");
+    const useTailwind = await fall.confirm("Use Tailwind CSS?");
     const argDest = getArguments()[0];
     const dest = path.isAbsolute(argDest) ? argDest : path.join(process.cwd(), argDest);
 
@@ -43,9 +44,10 @@ async function skeleton(): Promise<string> {
 
     fall.step(chalk.gray(`Skeleton path: ${skeletonPath}`))
         .step(chalk.gray(`Destination path: ${dest}`))
-        .step(chalk.gray(`Using ${useTypeScript ? "TypeScript" : "JavaScript"}`));
+        .step(chalk.gray(`Using ${useTypeScript ? "TypeScript" : "JavaScript"}`))
+        .step(chalk.gray(`Using ${useTailwind ? "Tailwind CSS" : "Default CSS"}`));
 
-    await createSkeleton(fall, useTypeScript, skeletonPath, dest);
+    await createSkeleton(fall, useTypeScript, skeletonPath, dest, useTailwind ? TailwindCSSFiles : []);
     fall.end(`Created skeleton in ${chalk.blue(Date.now() - time)}ms`);
 
     return dest;
