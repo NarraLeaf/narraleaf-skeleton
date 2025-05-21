@@ -2,7 +2,7 @@ import React from "react";
 import {useApp} from "narraleaf/client";
 
 export default function Home() {
-    const {app} = useApp();
+    const app = useApp();
 
     return (
         <div style={{

@@ -16,9 +16,9 @@ const App = ({children}) => {
             aspectRatio: 16 / 9, // set the aspect ratio
 
             ratioUpdateInterval: 0, // disable the ratio update interval
-            cps: 10, // set the dialog characters per second to 10
             /* Add your custom configurations here */
         });
+        game.preference.setPreference("cps", 10); // set the dialog characters per second to 10
     }, []);
 
     return (
@@ -41,6 +41,7 @@ const splashScreen = [{
 }];
 
 export default App;
+/**@type {import("narraleaf/client").GameMetadata} */
 export const meta = {
     story,
     splashScreen

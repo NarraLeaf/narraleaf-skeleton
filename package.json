@@ -10,8 +10,8 @@
   "devDependencies": {
     "@types/react": "^19",
     "esbuild": "^0.19.0",
-    "narraleaf": "^0.0.5",
-    "narraleaf-react": "^0.4.2",
+    "narraleaf": "^0.0.7",
+    "narraleaf-react": "^0.5.0",
     "react": "^19.0.0",
     "typescript": "^5.0.0"
   },
