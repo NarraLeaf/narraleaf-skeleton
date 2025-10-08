@@ -1,49 +1,75 @@
-import React, {useEffect} from 'react';
-import {useGame} from 'narraleaf-react';
-import {GameMetadata, SplashScreenDefinition} from 'narraleaf/client';
+import { KeyBindingType, useGame } from 'narraleaf-react';
+import React, { useEffect } from 'react';
+import { GameMetadata, requestMain } from 'narraleaf/renderer';
 
-// Import your assets
+// Import core assets and components
 import "./src/base.css";
-import {story} from "./src/story";
+import { scene1, story } from "./src/story";
+import { GameDialog } from './src/components/Dialog';
+import { DefaultMenu } from './src/components/Menu';
+import { GlobalStateConfigProvider } from './src/components/GlobalState';
+import GameNotification from './src/components/Notifications';
 
-const App = ({children}: {children: React.ReactNode}) => {
+// Import settings and plugin components
+import { GamePreferences } from './pages/home/settings';
+import { createPreloadEntryPlugin } from './src/plugins';
+
+// Main App component that initializes game configuration and plugins
+const App = ({ children }: { children: React.ReactNode }) => {
     // Access the game instance by using the useGame hook
     const game = useGame();
-
+    
+    // Initialize game configuration and preferences
     useEffect(() => {
-        game.configure({
-            width: 1920, // set the resolution width
-            height: 1080, // set the resolution height
-            aspectRatio: 16 / 9, // set the aspect ratio
+        requestMain<void, GamePreferences>("getGamePreferences").then((preferences) => {
+            // Import player preferences from main process
+            game.preference.importPreferences(preferences.playerPreferences);
 
-            ratioUpdateInterval: 0, // disable the ratio update interval
-            /* Add your custom configurations here */
+            // Configure game settings and components
+            game.configure({
+                // Display resolution settings
+                width: 1280, // set the resolution width
+                height: 720, // set the resolution height
+                aspectRatio: 16 / 9, // set the aspect ratio
+                dialogWidth: 1280,
+                dialogHeight: 720,
+
+                // Game behavior configuration
+                ratioUpdateInterval: 0, // disable the ratio update interval
+                screenshotQuality: 0.2,
+
+                // UI component customization
+                dialog: GameDialog,
+                notification: GameNotification,
+                menu: DefaultMenu,
+                defaultTextColor: "white",
+                defaultNametagColor: "#40a8c5",
+                fontSize: 20,
+                fontWeight: 500,
+            });
+
+            // Configure keyboard shortcuts
+            game.keyMap.addKeyBinding(KeyBindingType.skipAction, "Control");
         });
-        game.preference.setPreference("cps", 10); // set the dialog characters per second to 10
+    }, []);
+
+    // Initialize preload plugin for scene management
+    useEffect(() => {
+        const plugin = createPreloadEntryPlugin(scene1);
+        game.use(plugin);
     }, []);
 
     return (
-        <>
+        <GlobalStateConfigProvider>
             {children}
-        </>
+        </GlobalStateConfigProvider>
     );
 };
 
-const splashScreen: SplashScreenDefinition[] = [{
-    initial: {opacity: 0},
-    animate: {opacity: 1, transition: {duration: 2}}, // enter in 2 seconds
-    exit: {opacity: 0, transition: {duration: 1}}, // exit in 1 second
-    duration: 3, // stay for 3 seconds
-    splashScreen:(
-        <div className={"splash-screen"}>
-            <div><p className={"splash-text"}>Created with NarraLeaf</p></div>
-        </div>
-    )
-}];
-
 export default App;
-export const meta: GameMetadata = {
+
+// Export game metadata for the Narraleaf framework
+export const metadata: GameMetadata = {
     story,
-    splashScreen
 };
 

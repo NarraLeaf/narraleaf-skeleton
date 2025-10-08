@@ -1,14 +1,14 @@
 {
-  "tailwindcss": {
-    "extra": [
-      {
-        "from": "extra/tailwindcss/tailwind.config.js",
-        "to": "tailwind.config.js"
-      },
-      {
-        "from": "extra/tailwindcss/postcss.config.js",
-        "to": "postcss.config.js"
-      }
-    ]
-  }
+    "tailwindcss": {
+        "extra": [
+            {
+                "from": "extra/tailwindcss/tailwind.config.js",
+                "to": "tailwind.config.js"
+            },
+            {
+                "from": "extra/tailwindcss/postcss.config.js",
+                "to": "postcss.config.js"
+            }
+        ]
+    }
 }

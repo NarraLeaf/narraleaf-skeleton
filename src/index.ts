@@ -43,45 +43,38 @@ async function skeleton(): Promise<{ dest: string, manager: string }> {
     const fall = new FallTask();
     fall.start("Creating skeleton");
 
-    const useTypeScript = await fall.confirm("Use TypeScript?");
-    const useTailwind = await fall.confirm("Use Tailwind CSS?");
     const argDest = getArguments()[0];
     const dest = path.isAbsolute(argDest) ? argDest : path.join(process.cwd(), argDest);
 
     const skeletonDir = path.join(__dirname, "../skeleton");
-    const templateDir = path.join(skeletonDir, useTypeScript ? "skeleton-ts" : "skeleton-js");
+    const templateDir = path.join(skeletonDir, "skeleton-ts");
     const time = Date.now();
 
     fall.step(chalk.gray(`Skeleton path: ${templateDir}`))
-        .step(chalk.gray(`Destination path: ${dest}`))
-        .step(chalk.gray(`Using ${useTypeScript ? "TypeScript" : "JavaScript"}`))
-        .step(chalk.gray(`Using ${useTailwind ? "Tailwind CSS" : "Default CSS"}`));
+        .step(chalk.gray(`Destination path: ${dest}`));
 
     const replaceRulesPath = path.join(skeletonDir, "replace-rules.json");
     let replaceRules = {};
     try {
         replaceRules = JSON.parse(await fs.readFile(replaceRulesPath, "utf-8"));
-    } catch {}
+    } catch { }
 
     await copyDirWithRules(templateDir, dest, replaceRules);
 
-    if (useTailwind) {
-        const presetPath = path.join(skeletonDir, "generator-presets.json");
-        let presets: Presets = {};
-        try {
-            presets = JSON.parse(await fs.readFile(presetPath, "utf-8"));
-        } catch {}
-        const tailwind = presets["tailwindcss"] || presets["tailwind"];
-        if (tailwind && Array.isArray(tailwind.extra)) {
-            for (const item of tailwind.extra) {
-                const from = path.join(skeletonDir, item.from);
-                const to = path.join(dest, item.to);
-                await fs.mkdir(path.dirname(to), {recursive: true});
-                await fs.copyFile(from, to);
-            }
+    const presetPath = path.join(skeletonDir, "generator-presets.json");
+    let presets: Presets = {};
+    try {
+        presets = JSON.parse(await fs.readFile(presetPath, "utf-8"));
+    } catch { }
+    const tailwind = presets["tailwindcss"] || presets["tailwind"];
+    if (tailwind && Array.isArray(tailwind.extra)) {
+        for (const item of tailwind.extra) {
+            const from = path.join(skeletonDir, item.from);
+            const to = path.join(dest, item.to);
+            await fs.mkdir(path.dirname(to), { recursive: true });
+            await fs.copyFile(from, to);
         }
     }
-
     const tree = await scanDirTree(dest);
     getFileTree(tree, []).split('\n').forEach(line => fall.step(line));
 

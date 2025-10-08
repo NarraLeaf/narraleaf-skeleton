@@ -2,13 +2,11 @@ import {FallTask} from "./console";
 import {spawn} from "child_process";
 
 export function install(fall: FallTask, project: string): Promise<void> {
-    return fall.waitForLoading((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         npmInstall(project, (data) => {
-            fall.resetPrefix();
-            fall.step(data, 1);
+            process.stdout.write(data);
         }, (data) => {
-            fall.resetPrefix();
-            fall.step(data, 1);
+            process.stdout.write(data);
         }).then(() => {
             resolve();
             fall.end("Dependencies installed");
@@ -16,11 +14,11 @@ export function install(fall: FallTask, project: string): Promise<void> {
             reject(error);
             fall.end("Failed to install dependencies");
         });
-    }, "Installing dependencies");
+    });
 }
 
 export function installWithManager(fall: FallTask, project: string, manager: string): Promise<void> {
-    return fall.waitForLoading((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         let fn: typeof npmInstall;
         switch (manager) {
             case "yarn":
@@ -37,10 +35,8 @@ export function installWithManager(fall: FallTask, project: string, manager: str
                 fn = npmInstall;
         }
         fn(project, (data) => {
-            fall.resetPrefix();
             process.stdout.write(data);
         }, (data) => {
-            fall.resetPrefix();
             process.stdout.write(data);
         }).then(() => {
             resolve();
@@ -49,7 +45,7 @@ export function installWithManager(fall: FallTask, project: string, manager: str
             reject(error);
             fall.end("Failed to install dependencies");
         });
-    }, `Installing dependencies with ${manager}`);
+    });
 }
 
 function npmInstall(cwd: string, onStdout: (data: string) => void, onStderr: (data: string) => void): Promise<void> {
