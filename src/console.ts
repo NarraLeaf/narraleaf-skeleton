@@ -141,12 +141,16 @@ export class FallTask {
         for (let i = 0; i < steps; i++) {
             console.log(`${this.getPrefix()}`);
         }
-        let o = str.split("\n")
-            .map((line) => line.length > process.stdout.columns - (this.getPrefix().length + 2)
-                ? sliceString(line, process.stdout.columns - (this.getPrefix().length + 2))
-                : line
-            )
-            .map((line) => " ".repeat(space) + line);
+        let o: string[] = [];
+        str.split("\n").forEach((line) => {
+            const maxLen = process.stdout.columns - (this.getPrefix().length + 2);
+            if (line.length > maxLen) {
+                o.push(...sliceString(line, maxLen));
+            } else {
+                o.push(line);
+            }
+        });
+        o = o.map((line) => " ".repeat(space) + line);
         o.forEach((line) => {
             console.log(`${this.getPrefix()} ${line}`);
         });
@@ -239,6 +243,15 @@ export class FallTask {
     async confirm(prompt: string): Promise<boolean> {
         const answer = await confirm(prompt, {
             prefix: this.getEndPrefix(),
+        });
+        this.resetPrefix();
+        return answer;
+    }
+
+    async select(prompt: string, choices: string[], defaultValue?: string): Promise<string> {
+        const answer = await select(prompt, choices, {
+            default: defaultValue,
+            prefix: this.getEndPrefix()
         });
         this.resetPrefix();
         return answer;
